@@ -4,5 +4,5 @@
 
 ```shell
 ansible-playbook site-common.yml -i inventory
-ansible-playbook site.yml -i inventory -e keycloak_host="keycloak.docs-planet.site"
+ansible-playbook site.yml -i inventory -e keycloak_host="sso-lab.docs-planet.site"
 ```
