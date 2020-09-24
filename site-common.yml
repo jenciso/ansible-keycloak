@@ -1,0 +1,19 @@
+---
+- name: keycloak | prereq
+  hosts: all
+  remote_user: centos
+  environment: "{{ proxy_env }}"
+  roles:
+    - common
+  tags:
+    - common
+
+
+- name: keycloak | docker-ce
+  hosts: all
+  remote_user: centos
+  environment: "{{ proxy_env }}"
+  roles:
+    - docker-ce
+  tags:
+    - docker-ce

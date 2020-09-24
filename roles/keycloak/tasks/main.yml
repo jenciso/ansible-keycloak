@@ -1,0 +1,40 @@
+---
+- name: keycloak | create directory
+  file: path={{ item }} state=directory mode=0755
+  with_items:
+    - /data/keycloak/config/ssl-certs
+    - /data/keycloak/data
+
+
+- name: keycloak | create .env
+  lineinfile:
+    path: /data/keycloak/.env
+    regexp: '^COMPOSE_PROJECT_NAME='
+    state: present
+    create: yes
+    line: COMPOSE_PROJECT_NAME=keycloak
+
+
+- name: keycloak | copying keycloak's config files
+  template: src={{ item }} dest=/data/keycloak/config/
+  with_items:
+    - default.conf
+  notify:
+    - restart keycloak
+
+
+- name: keycloak | copy ssl files
+  copy: src={{ item }} dest=/data/keycloak/config/ssl-certs/
+  with_items:
+    - docs-planet.site.key
+    - docs-planet.site.crt
+  notify:
+    - restart keycloak
+
+
+- name: keycloak | copy docker-compose.yml
+  template:
+    src: docker-compose.yml
+    dest: /data/keycloak/
+  notify:
+    - restart keycloak

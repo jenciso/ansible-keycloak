@@ -1,0 +1,2 @@
+[keycloak]
+infra.docs-planet.site  ansible_host=10.64.13.140

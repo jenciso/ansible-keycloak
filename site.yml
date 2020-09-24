@@ -1,0 +1,9 @@
+---
+- name: keycloak
+  hosts: all
+  remote_user: centos
+  environment: "{{ proxy_env }}"
+  roles:
+    - keycloak
+  tags:
+    - keycloak
